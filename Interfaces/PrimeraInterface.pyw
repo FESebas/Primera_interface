@@ -2,13 +2,25 @@
 from tkinter import *
 from tkinter import messagebox
 import prueba
+import os
 
+ # Identificador de la app frente a windows
+try:
+    from ctypes import windll
+
+    myappid="fronteraenergy.ca"
+    windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+except ImportError:
+    pass
+
+#Variable para rutas relativas para iconos e imagenes
+basedir=os.path.dirname(__file__) #obtiene la ruta de este archivo
 
 # ----------------------------- Configuración de la raiz -----------------------------
 raiz=Tk()
 raiz.title("Interfaz cuestionario descuento tributario") #Titulo
 raiz.resizable(True,True) #Redimencionable alto y ancho
-raiz.iconbitmap("IconoFE.ico") #icono
+raiz.iconbitmap( os.path.join(basedir, "IconoFE.ico") ) #icono
 #raiz.geometry("650x350") #se le da tamaño al frame, ya que la raiz se adapta
 raiz.config(width=500, height=400, bg="#833177") #Color de fondo
 raiz.config(bd=5)
@@ -46,7 +58,7 @@ def hola2():
 def FrameGyA():
     FrameGyA=Tk()
     FrameGyA.title("Costo G&A")
-    FrameGyA.iconbitmap("IconoFE.ico")
+    FrameGyA.iconbitmap(os.path.join(basedir, "IconoFE.ico"))
 
     barraMenu=Menu(FrameGyA) #creacion objeto menu
     FrameGyA.config(menu=barraMenu)
@@ -92,6 +104,7 @@ def FrameGyA():
     
     textFinal=Label(frame)
     textFinal.grid(row=4)
+    
      #condicional esconder raiz
     if(FrameGyA):
         raiz.withdraw()
@@ -152,7 +165,8 @@ barraMenu.add_cascade(label="Salir", menu=archivosalida)
 # ------------------------- Fin Menu -------------------------------
 
 # ------------------------- Diseño raiz ---------------------------
-img_bienvenida=PhotoImage(file="Frontera_Bienvenida.PNG")
+
+img_bienvenida=PhotoImage(file=os.path.join(basedir, "Frontera_Bienvenida.PNG") )
 imgzoom=img_bienvenida.subsample(8)
 Label(raiz, image=imgzoom, padx=0.5, pady=0.5).grid(row=0, column=0) #pack()
 D_trib = Label(raiz, text="", bg="#833177")

@@ -1,0 +1,6 @@
+Desde el cmd, instalar "pyinstaller (pip install pyinstaller)", luego desde la ruta del archivo a compilar, ejecutar:
+
+pyinstaller --windowed --icon=IconoFE.ico --add-data="IconoFE.ico;." --add-data="Frontera_Bienvenida.PNG;." --add-data="prueba.py;." PrimeraInterface.pyw
+
+- Si se desea poner mas archivos como iconos o imagenes para con la app, usar 
+(--add-data="nombre_archivo.extencion;ruta_guardado(o para raiz usar '.')"
